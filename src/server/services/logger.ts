@@ -33,7 +33,7 @@ export class SafeLogger {
   public static info(message: string, meta?: any): void {
     const timestamp = new Date().toISOString();
     const cleanMeta = meta ? this.sanitize(meta) : '';
-    console.log(`[${timestamp}] [INFO] ${message}`, cleanMeta ? JSON.stringify(cleanMeta) : '');
+    console.error(`[${timestamp}] [INFO] ${message}`, cleanMeta ? JSON.stringify(cleanMeta) : '');
   }
 
   public static warn(message: string, meta?: any): void {

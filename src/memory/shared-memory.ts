@@ -338,4 +338,22 @@ export class SharedMemoryManager {
 
     return result;
   }
+
+  public flagEvidenceConflict(companyId: string, evidenceIdA: string, evidenceIdB: string): void {
+    const a = this.db.prepare(`SELECT id FROM evidence_ledger WHERE id = ? AND company_id = ?`).get(evidenceIdA, companyId);
+    if (!a) throw new Error(`Evidence ${evidenceIdA} not found in workspace.`);
+    const b = this.db.prepare(`SELECT id FROM evidence_ledger WHERE id = ? AND company_id = ?`).get(evidenceIdB, companyId);
+    if (!b) throw new Error(`Evidence ${evidenceIdB} not found in workspace.`);
+
+    this.db.prepare(`UPDATE evidence_ledger SET conflicting_with_id = ? WHERE id = ? AND company_id = ?`).run(evidenceIdB, evidenceIdA, companyId);
+    this.db.prepare(`UPDATE evidence_ledger SET conflicting_with_id = ? WHERE id = ? AND company_id = ?`).run(evidenceIdA, evidenceIdB, companyId);
+  }
+
+  public resolveEvidenceConflict(companyId: string, evidenceId: string): void {
+    const ev = this.db.prepare(`SELECT conflicting_with_id FROM evidence_ledger WHERE id = ? AND company_id = ?`).get(evidenceId, companyId) as any;
+    if (ev?.conflicting_with_id) {
+      this.db.prepare(`UPDATE evidence_ledger SET conflicting_with_id = NULL WHERE id = ? AND company_id = ?`).run(ev.conflicting_with_id, companyId);
+    }
+    this.db.prepare(`UPDATE evidence_ledger SET conflicting_with_id = NULL WHERE id = ? AND company_id = ?`).run(evidenceId, companyId);
+  }
 }

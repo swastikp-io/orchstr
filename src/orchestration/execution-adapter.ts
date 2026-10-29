@@ -75,7 +75,7 @@ export class AntigravityExecutionAdapter {
         department: agent.department,
         purpose: agent.purpose,
         instructions: agent.instructions,
-        outputSchema: agent.output_schema,
+        outputSchema: typeof agent.output_schema === 'string' ? agent.output_schema : JSON.stringify(agent.output_schema, null, 2),
         permittedActions: agent.permitted_actions
       },
       companyContextReferences: {
