@@ -1,0 +1,62 @@
+{
+  "company": {
+    "id": "comp_1793284915368_vk6nt",
+    "name": "ApexFlow Systems",
+    "slug": "apexflow-systems",
+    "industry": "Enterprise Hardware & Supply Chain Tech",
+    "vision": "To eliminate multi-tier manufacturing supply chain stoppages through continuous graph intelligence and autonomous mitigation playbooks.",
+    "created_at": "2026-10-29T14:41:55.368Z",
+    "updated_at": "2026-10-29T14:41:55.368Z"
+  },
+  "context": {
+    "id": "ctx_comp_1793284915368_vk6nt",
+    "company_id": "comp_1793284915368_vk6nt",
+    "brief": "ApexFlow is an Autonomous Supply Chain Resilience Operating System. Mid-market manufacturers managing $50M–$500M BOM spend suffer catastrophic line stoppages because Tier-2/3 raw material bottlenecks remain invisible until shipments are weeks overdue. ApexFlow connects directly to legacy ERPs (SAP, NetSuite) in 48 hours, continuously maps sub-tier supplier dependencies, and generates pre-vetted recovery playbooks with human-in-the-loop executive control.",
+    "target_customer": "VPs of Supply Chain, Heads of Procurement, and Chief Operating Officers at mid-market precision manufacturing, industrial electronics, and medical device companies.",
+    "value_prop": "Continuous sub-tier BOM risk observability and deterministic mitigation playbooks that prevent expensive production line shutdowns without requiring multi-year ERP migrations.",
+    "assumptions": [
+      {
+        "id": "asm_1793284915370_0",
+        "statement": "Mid-market manufacturing VPs will pay $50k+/year if we detect sub-tier shortages 14 days earlier.",
+        "confidence": "high",
+        "status": "validated",
+        "category": "market"
+      },
+      {
+        "id": "asm_1793284915370_1",
+        "statement": "Procurement directors will reject fully automated order dispatching without explicit human manager signoff.",
+        "confidence": "high",
+        "status": "validated",
+        "category": "product"
+      },
+      {
+        "id": "asm_1793284915370_2",
+        "statement": "Legacy ERP API connectors (SAP RFC, NetSuite RESTlet) can be deployed within 48 hours without engineering support.",
+        "confidence": "medium",
+        "status": "untested",
+        "category": "product"
+      },
+      {
+        "id": "asm_1793284915370_3",
+        "statement": "Cold outbound email referencing specific sub-tier supplier bottlenecks will generate >8% demo booking rate.",
+        "confidence": "medium",
+        "status": "untested",
+        "category": "growth"
+      },
+      {
+        "id": "asm_1793284915370_4",
+        "statement": "Competitors like Project44 and SAP Ariba will be unable to replicate deep multi-tier graph simulations due to legacy schema lock-in.",
+        "confidence": "low",
+        "status": "untested",
+        "category": "market"
+      }
+    ],
+    "constraints": [
+      "Must maintain SOC2 Type II compliance standards for customer ERP telemetry.",
+      "All autonomous mitigation playbooks must require explicit human approval before external transmission.",
+      "Initial release targets North American and European industrial manufacturing corridors."
+    ],
+    "created_at": "2026-10-29T14:41:55.368Z",
+    "updated_at": "2026-10-29T14:41:55.368Z"
+  }
+}
