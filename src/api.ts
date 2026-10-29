@@ -117,6 +117,15 @@ export const api = {
   // Activity
   getActivity: (companyId: string, limit = 50) => request<ActivityEvent[]>(`/companies/${companyId}/activity?limit=${limit}`),
 
+  // Setup prompt
+  getSetupPrompt: () => request<{
+    prompt: string;
+    configSnippet: Record<string, any>;
+    cursorSnippet: Record<string, any>;
+    claudeCodeCommand: string;
+    fullCopyText: string;
+  }>('/setup-prompt'),
+
   // Reseed DB
   reseed: () => request<{ success: boolean; message: string; apexFlowId: string; bioPulseId: string }>('/seed', {
     method: 'POST'

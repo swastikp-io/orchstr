@@ -16,6 +16,7 @@ import {
   ExecuteTaskSchema,
   CreateDecisionSchema
 } from '../../shared/schemas/index.js';
+import { getSetupConfig } from '../services/setup-config.js';
 import { runSeed } from '../../db/seed.js';
 
 export function createApiRouter(db: DatabaseSync): Router {
@@ -30,6 +31,16 @@ export function createApiRouter(db: DatabaseSync): Router {
   // Health
   router.get('/health', (req, res) => {
     res.json({ status: 'ok', timestamp: new Date().toISOString() });
+  });
+
+  // Setup prompt with local detected paths for Claude Desktop & Cursor
+  router.get('/setup-prompt', (req, res) => {
+    try {
+      const config = getSetupConfig();
+      res.json(config);
+    } catch (err: any) {
+      res.status(500).json({ error: err.message });
+    }
   });
 
   // Seed / Reset

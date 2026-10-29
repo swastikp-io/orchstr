@@ -1,0 +1,31 @@
+{
+  "manifest_version": "0.1",
+  "name": "orchstr",
+  "display_name": "ORCHSTR — AI-Native Company Operating System",
+  "version": "1.0.0",
+  "description": "Deterministic DAG task planner, 12 specialized agent contracts, tamper-evident human approvals, and shared memory ledger for autonomous company operations.",
+  "author": {
+    "name": "ORCHSTR Team"
+  },
+  "server": {
+    "type": "node",
+    "entry_point": "dist/mcp/server.js",
+    "mcp_config": {
+      "command": "node",
+      "args": [
+        "${extensionPath}/dist/mcp/server.js"
+      ],
+      "env": {
+        "ORCHSTR_DB_PATH": "${extensionPath}/orchstr.db"
+      }
+    }
+  },
+  "compatibility": {
+    "node": ">=22.5.0"
+  },
+  "capabilities": {
+    "tools": true,
+    "resources": true,
+    "prompts": true
+  }
+}
