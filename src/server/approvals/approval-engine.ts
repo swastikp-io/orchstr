@@ -213,10 +213,6 @@ export class ApprovalEngine {
     }));
   }
 
-  public listPendingApprovals(companyId: string): ConsequentialApproval[] {
-    return this.listApprovals(companyId).filter(a => a.status === 'pending');
-  }
-
   public approve(id: string, reviewer: string, feedback?: string): ConsequentialApproval {
     const existing = this.getApproval(id);
     if (!existing) throw new Error(`Approval ${id} not found.`);

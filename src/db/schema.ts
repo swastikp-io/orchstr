@@ -67,13 +67,8 @@ CREATE TABLE IF NOT EXISTS tasks (
   description TEXT NOT NULL,
   assigned_agent_id TEXT NOT NULL,
   department TEXT NOT NULL,
-  stage TEXT NOT NULL DEFAULT 'start',
-  label TEXT NOT NULL DEFAULT 'agent_task',
   status TEXT NOT NULL CHECK(status IN ('queued', 'running', 'blocked', 'review', 'approved', 'completed', 'failed')),
   priority TEXT NOT NULL CHECK(priority IN ('low', 'medium', 'high', 'critical')),
-  founder_move TEXT DEFAULT '',
-  watch_out TEXT DEFAULT '',
-  checklist TEXT NOT NULL DEFAULT '[]',
   inputs TEXT NOT NULL DEFAULT '{}',
   outputs TEXT,
   acceptance_criteria TEXT NOT NULL DEFAULT '[]',
@@ -263,25 +258,4 @@ CREATE INDEX IF NOT EXISTS idx_evidence_comp ON evidence_ledger(company_id);
 export function initializeDatabase(db: DatabaseSync): void {
   db.exec('PRAGMA foreign_keys = ON;');
   db.exec(SCHEMA_SQL);
-
-  try {
-    const existingCols = (db.prepare(`PRAGMA table_info(tasks)`).all() as any[]).map(c => c.name);
-    if (!existingCols.includes('stage')) {
-      db.exec(`ALTER TABLE tasks ADD COLUMN stage TEXT NOT NULL DEFAULT 'start'`);
-    }
-    if (!existingCols.includes('label')) {
-      db.exec(`ALTER TABLE tasks ADD COLUMN label TEXT NOT NULL DEFAULT 'agent_task'`);
-    }
-    if (!existingCols.includes('founder_move')) {
-      db.exec(`ALTER TABLE tasks ADD COLUMN founder_move TEXT DEFAULT ''`);
-    }
-    if (!existingCols.includes('watch_out')) {
-      db.exec(`ALTER TABLE tasks ADD COLUMN watch_out TEXT DEFAULT ''`);
-    }
-    if (!existingCols.includes('checklist')) {
-      db.exec(`ALTER TABLE tasks ADD COLUMN checklist TEXT NOT NULL DEFAULT '[]'`);
-    }
-  } catch (err) {
-    // Table may not exist yet or altered already
-  }
 }
